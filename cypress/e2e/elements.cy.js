@@ -67,7 +67,7 @@ describe('elements test', () => {
     cy.get('label[for="noRadio"]').should('have.class', 'custom-control-label', 'disabled');
   })
 
-  it.only('Web Tables', ()=> {
+  it('Web Tables', ()=> {
     cy.get('.menu-list').contains('Web Tables').click({force: true});
     cy.get('.text-center').should('have.text', 'Web Tables');
     cy.get('#addNewRecordButton').should('contain', 'Add').click();
@@ -90,4 +90,20 @@ describe('elements test', () => {
     cy.get('button[class=close]').click();
     cy.get('span[title="Delete"]').click();
   })
+
+  it.only('Buttons', () => {
+    cy.get('.menu-list').contains('Buttons').click({force: true});
+    cy.get('.text-center').should('have.text', 'Buttons');
+    //Double Click
+    cy.get('#doubleClickBtn').should('contain', 'Double Click Me').dblclick();
+    cy.get('#doubleClickMessage').should('have.text', 'You have done a double click');
+    //Right Click
+    cy.get('#rightClickBtn').should('contain', 'Right Click Me').rightclick();
+    cy.get('#rightClickMessage').should('have.text', 'You have done a right click');
+    //Dynamic button
+    cy.get('.mt-4').eq(3).contains('Click Me').click();
+    cy.get('#dynamicClickMessage').should('have.text', 'You have done a dynamic click');
+  })
+
+  
 })
