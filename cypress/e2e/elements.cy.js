@@ -91,7 +91,7 @@ describe('elements test', () => {
     cy.get('span[title="Delete"]').click();
   })
 
-  it.only('Buttons', () => {
+  it('Buttons', () => {
     cy.get('.menu-list').contains('Buttons').click({force: true});
     cy.get('.text-center').should('have.text', 'Buttons');
     //Double Click
@@ -105,5 +105,14 @@ describe('elements test', () => {
     cy.get('#dynamicClickMessage').should('have.text', 'You have done a dynamic click');
   })
 
-  
+  it.only('Links that opens in the new tab', () => {
+    cy.get('.menu-list').contains('Links').click({force: true});
+    cy.get('.text-center').should('have.text', 'Links');
+    cy.get('a[href="https://demoqa.com"]').then((link) => {
+      const url = link.prop('href');
+      cy.visit('https://demoqa.com/');
+      cy.url().should('eq', 'https://demoqa.com/');
+    })
+
+  })
 })
